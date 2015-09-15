@@ -1,0 +1,16 @@
+<p>{{ question.choice_set.count }}</p>
+
+{% if question %}
+<h1>{{question.id}}:-{{question.question_text}}</h1>
+<ul>
+    {% for choice in question.choice_set.all %}
+        <li>{{choice.choice_text}}--{{choice.votes}} vote{{choice.votes|pluralize}}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'polls:detail' question.id %}">Vote Again?</a>
+
+{% else %}
+    <p>This question has no choices and hence cannot be viewed.</p>
+<a href="{% url 'polls:index' %}">Goto Index page</a>
+{% endif %}
+
